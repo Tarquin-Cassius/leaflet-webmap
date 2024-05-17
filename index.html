@@ -97,9 +97,11 @@
                 } catch (error) {
                     console.error("Error fetching data: ", error);
                 }
-            }
+            };
 
+            /* // Denna linje får hela karten att försvinna samt visar tre 'error' koder. https://codebeautify.org/jsvalidate
             var scoutData = await fetchData();
+            */
 
             var campfiresCheckbox = document.getElementById("campfires");
 
@@ -109,7 +111,7 @@
                     const showMarker = 
                         (type === 'camp')
                 }
-            }
+            )};
 
 
         </script>
