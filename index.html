@@ -62,11 +62,25 @@
             // Kartans initialkoordinater (Lillgårn)
             var initialCoordinates = [60.25542, 18.69360];
 
-            // Skapar kartan med restriktioner på zoom -->
+            // Layer dvs, bakgrunder.
+            var osmHot = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.<br>This site is open source. You can help <a href="https://github.com/danielmartling/leaflet-webmap">improve it</a>.',
+            });
+
+            var sat = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.<br>This site is open source. You can help <a href="https://github.com/danielmartling/leaflet-webmap">improve it</a>.',
+            });
+
+            var ort = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.<br>This site is open source. You can help <a href="https://github.com/danielmartling/leaflet-webmap">improve it</a>.',
+            });
+
+            // Skapar kartan med restriktioner på zoom samt definerar ovanstående layers.
             var lfmap = L.map('map', {
                 center: initialCoordinates,
                 zoom: 14,
-                minZoom: 13
+                minZoom: 13,
+                layers: [osmHot, sat, ort]
             });
 
             // Definera kartans gränser (en bit utanför VÖ, Garpen, Bodskären)-->
@@ -77,11 +91,15 @@
             lfmap.on('drag', function() {
                 lfmap.panInsideBounds(bounds, {animate: true});
             })
+            // Definer hur varje layer ska visas.
+            var baseMaps = {
+                "Orientering": ort,
+                "Satelit": sat,
+                "Utforska": osmHot
+            };
 
-            // Lägg till OSM-lager -->
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.<br>This site is open source. You can help <a href="https://github.com/danielmartling/leaflet-webmap">improve it</a>.',
-            }).addTo(lfmap);
+            // Layercontrol definerar ovanstående samt får allt att kopplas.
+            var layerControl = L.control.layers(baseMaps).addTo(lfmap);
 
             async function fetchData() {
                 try {
@@ -113,7 +131,7 @@
                 }
             )};
 
-
+            
         </script>
     </body>
 </html>
