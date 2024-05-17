@@ -91,12 +91,28 @@
             lfmap.on('drag', function() {
                 lfmap.panInsideBounds(bounds, {animate: true});
             })
+
             // Definer hur varje layer ska visas.
             var baseMaps = {
                 "Orientering": ort,
                 "Satelit": sat,
                 "Utforska": osmHot
             };
+            
+            /*
+            // Orienterings Karta Overlay
+            var imageUrl = 'img/orkarta.png';
+            var errorOverlayUrl = 'https://cdn-icons-png.flaticon.com/512/110/110686.png';
+            var altText = 'Image of Newark, N.J. in 1922. Source: The University of Texas at Austin, UT Libraries Map Collection.';
+            var latLngBounds = L.latLngBounds([[60.269335873937145, 18.68231575384689], [60.24560750043479, 18.710770072883978]]);
+
+            var imageOverlay = L.imageOverlay(imageUrl, latLngBounds, {
+                opacity: 1,
+                errorOverlayUrl: errorOverlayUrl,
+                alt: altText,
+                interactive: true
+            }).addTo(lfmap);
+            */
 
             // Layercontrol definerar ovanstående samt får allt att kopplas.
             var layerControl = L.control.layers(baseMaps).addTo(lfmap);
